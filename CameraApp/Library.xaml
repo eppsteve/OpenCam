@@ -11,7 +11,7 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Pivot>
             <PivotItem Header="Photos">
-                <GridView Name="photos" Visibility="Visible">
+                <GridView Name="photos" Visibility="Visible" RightTapped="photos_RightTapped">
                     <GridView.ItemTemplate>
                         <DataTemplate>
                             <Grid Height="100" Margin="10, 2, 10, 2">
@@ -24,10 +24,19 @@
                             </Grid>
                         </DataTemplate>
                     </GridView.ItemTemplate>
+                    <GridView.Resources>
+                        <MenuFlyout x:Name="photosMenuFlyout">
+                            <MenuFlyout.Items>
+                                <MenuFlyoutItem x:Name="Find"  Text="Find in Explorer" Click="Find_Click" />
+                                <MenuFlyoutItem x:Name="Delete" Text="Delete" />
+                            </MenuFlyout.Items>
+                        </MenuFlyout>
+                    </GridView.Resources>
                 </GridView>
             </PivotItem>
+            
             <PivotItem Header="Videos">
-                <GridView Name="videos" Visibility="Visible">
+                <GridView Name="videos" Visibility="Visible" RightTapped="videos_RightTapped">
                     <GridView.ItemTemplate>
                         <DataTemplate>
                             <Grid Height="100" Margin="10, 2, 10, 2">
@@ -40,6 +49,14 @@
                             </Grid>
                         </DataTemplate>
                     </GridView.ItemTemplate>
+                    <GridView.Resources>
+                        <MenuFlyout x:Name="videosMenuFlyout">
+                            <MenuFlyout.Items>
+                                <MenuFlyoutItem x:Name="FindVideo"  Text="Find v in Explorer" Click="FindVideo_Click" />
+                                <MenuFlyoutItem x:Name="DeleteVid" Text="Delete" />
+                            </MenuFlyout.Items>
+                        </MenuFlyout>
+                    </GridView.Resources>
                 </GridView>
             </PivotItem>
         </Pivot>
