@@ -5,6 +5,7 @@ using System.IO;
 using Windows.Storage;
 using Windows.System;
 using Windows.UI.Core;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -91,7 +92,7 @@ namespace CameraApp
                 var image = item as Photo; //cast to photo
                 var path = Path.Combine(ApplicationData.Current.LocalFolder.Path, folder_str + image.Name); //get path
                 StorageFile file = await StorageFile.GetFileFromPathAsync(path); //create storageFile from path
-                t.ItemsToSelect.Add(file);
+                t.ItemsToSelect.Add(file);                
             }
 
             await Launcher.LaunchFolderAsync(folder, t);
@@ -129,6 +130,64 @@ namespace CameraApp
             }
 
             await Launcher.LaunchFolderAsync(folder, t);
+        }
+
+        private async void DeletePhoto_Click(object sender, RoutedEventArgs e)
+        {
+            MessageDialog showDialog = new MessageDialog("The selected photo will be deleted from your machine.", "Are you sure?");
+            showDialog.Commands.Add(new UICommand("Yes")
+            {
+                Id = 0
+            });
+            showDialog.Commands.Add(new UICommand("No")
+            {
+                Id = 1
+            });
+            showDialog.DefaultCommandIndex = 0;
+            showDialog.CancelCommandIndex = 1;
+            var result = await showDialog.ShowAsync();
+            if ((int)result.Id == 0)
+            {
+                var folder_str = "Photos\\";
+
+                //get selected item
+                foreach (var item in photos.SelectedItems)
+                {
+                    var photo = item as Photo;
+                    var path = Path.Combine(ApplicationData.Current.LocalFolder.Path, folder_str + photo.Name); //get path
+                    StorageFile file = await StorageFile.GetFileFromPathAsync(path); //create storageFile from path
+                    await file.DeleteAsync();
+                }
+            }
+        }
+
+        private async void DeleteVideo_Click(object sender, RoutedEventArgs e)
+        {
+            MessageDialog showDialog = new MessageDialog("The selected video will be deleted from your machine.", "Are you sure?");
+            showDialog.Commands.Add(new UICommand("Yes")
+            {
+                Id = 0
+            });
+            showDialog.Commands.Add(new UICommand("No")
+            {
+                Id = 1
+            });
+            showDialog.DefaultCommandIndex = 0;
+            showDialog.CancelCommandIndex = 1;
+            var result = await showDialog.ShowAsync();
+            if ((int)result.Id == 0)
+            {
+                var folder_str = "Videos\\";
+
+                //get selected item
+                foreach (var item in videos.SelectedItems)
+                {
+                    var photo = item as Photo;
+                    var path = Path.Combine(ApplicationData.Current.LocalFolder.Path, folder_str + photo.Name); //get path
+                    StorageFile file = await StorageFile.GetFileFromPathAsync(path); //create storageFile from path
+                    await file.DeleteAsync();
+                }
+            }
         }
     }
 }
