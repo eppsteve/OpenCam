@@ -7,7 +7,38 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
+    
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Grid.Row="0">
+            <CaptureElement Height="650" Name="captureElement" />
+        </StackPanel>
+        
+            <CommandBar Grid.Row="1" Background="Transparent" IsOpen="False">
+              <CommandBar.Content>
+                <StackPanel Orientation="Horizontal">
+                    <AppBarButton Icon="Camera" Name="cameraIcon" Click="button_Click" />
+                    <AppBarButton Icon="RotateCamera" Name="rotateCameraIcon" Click="button_Click" />
+                    <ComboBox Margin="0, 10, 0, 0" Name="videoQuality" SelectionChanged="videoType_SelectionChanged">
+                        <ComboBoxItem IsSelected="True">Auto</ComboBoxItem>
+                        <ComboBoxItem>1080p</ComboBoxItem>
+                        <ComboBoxItem>720p</ComboBoxItem>
+                        <ComboBoxItem>VGA</ComboBoxItem>
+                    </ComboBox>
+                    <AppBarButton Icon="Video" Name="videoIcon" Click="button_Click"  Margin="50, 0, 20, 0" />
+                    <ComboBox Margin="0, 10, 0, 0" Name="videoType" SelectionChanged="videoType_SelectionChanged">
+                        <ComboBoxItem IsSelected="True">MP4</ComboBoxItem>
+                        <ComboBoxItem>WMV</ComboBoxItem>
+                    </ComboBox>
+                    <AppBarButton Icon="Microphone" Margin="0, 0, 0, 0" Name="muteIcon" Click="button_Click" />
+                    <AppBarButton Icon="Library" HorizontalAlignment="Right" Name="libraryIcon" Click="button_Click" />
+                </StackPanel>
+                </CommandBar.Content>                    
+            </CommandBar>
+            
     </Grid>
 </Page>
