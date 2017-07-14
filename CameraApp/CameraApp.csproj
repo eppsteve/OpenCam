@@ -7,8 +7,8 @@
     <ProjectGuid>{A7D6BB64-8DF8-49A8-B114-00E2D803F438}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CameraApp</RootNamespace>
-    <AssemblyName>CameraApp</AssemblyName>
+    <RootNamespace>OpenCam</RootNamespace>
+    <AssemblyName>OpenCam</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.15063.0</TargetPlatformVersion>
@@ -101,7 +101,7 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\Photo.cs" />
+    <Compile Include="Model\GalleryItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

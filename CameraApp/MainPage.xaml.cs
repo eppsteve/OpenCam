@@ -113,7 +113,7 @@ namespace CameraApp
                 Encoding = GetVideoEncoding(); // Get the current encoding selection.
 
                 // Start recording
-                var file = await (await ApplicationData.Current.LocalFolder.CreateFolderAsync("CameraApp",
+                var file = await (await ApplicationData.Current.LocalFolder.CreateFolderAsync("Videos",
                                     CreationCollisionOption.OpenIfExists)).CreateFileAsync(
                                         string.Format("Recording_{0}-{1}.{2}",
                                         myEncoding,
@@ -219,6 +219,10 @@ namespace CameraApp
             {
                 MuteUnmute();
             }
+            else if ((sender as AppBarButton).Name == "aboutIcon")
+            {
+                ShowAbout();
+            }
             else if ((sender as AppBarButton).Name == "libraryIcon")
             {
                 //App.RootFrame.Navigate(typeof(Library));
@@ -226,6 +230,11 @@ namespace CameraApp
 
                 CleanResources();
             }
+        }
+
+        private void ShowAbout()
+        {
+            var msg = new MessageDialog("OpenCam ver. 0.1\nsteve.alogaris@outlook.com", "About OpenCam...").ShowAsync();
         }
 
         private void videoType_SelectionChanged(object sender, SelectionChangedEventArgs e)

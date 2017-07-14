@@ -7,19 +7,19 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    
+
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        
+
         <StackPanel Grid.Row="0">
             <CaptureElement Height="650" Name="captureElement" />
         </StackPanel>
-        
-            <CommandBar Grid.Row="1" Background="Transparent" IsOpen="False">
-              <CommandBar.Content>
+
+        <CommandBar Grid.Row="1" Background="Transparent" IsOpen="False">
+            <CommandBar.Content>
                 <StackPanel Orientation="Horizontal">
                     <AppBarButton Icon="Camera" Name="cameraIcon" Click="button_Click" />
                     <AppBarButton Icon="RotateCamera" Name="rotateCameraIcon" Click="button_Click" />
@@ -36,9 +36,14 @@
                     </ComboBox>
                     <AppBarButton Icon="Microphone" Margin="0, 0, 0, 0" Name="muteIcon" Click="button_Click" />
                     <AppBarButton Icon="Library" HorizontalAlignment="Right" Name="libraryIcon" Click="button_Click" />
+                    <AppBarButton FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Right" Name="aboutIcon" Click="button_Click">
+                        <AppBarButton.Icon>
+                            <FontIcon Glyph=""/>
+                        </AppBarButton.Icon>
+                    </AppBarButton>
                 </StackPanel>
-                </CommandBar.Content>                    
-            </CommandBar>
-            
+            </CommandBar.Content>
+        </CommandBar>
+
     </Grid>
 </Page>

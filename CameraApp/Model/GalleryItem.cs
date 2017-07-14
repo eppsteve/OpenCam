@@ -2,7 +2,7 @@
 
 namespace CameraApp.Model
 {
-    class Photo
+    class GalleryItem
     {
         public string Name { get; set; }
         public Uri Path { get; set; }

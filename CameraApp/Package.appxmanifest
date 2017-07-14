@@ -3,8 +3,8 @@
   <Identity Name="ef557b7d-bb11-4c40-b048-159336d09050" Publisher="CN=steve" Version="1.0.0.0" />
   <mp:PhoneIdentity PhoneProductId="ef557b7d-bb11-4c40-b048-159336d09050" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>CameraApp</DisplayName>
-    <PublisherDisplayName>steve</PublisherDisplayName>
+    <DisplayName>OpenCam</DisplayName>
+    <PublisherDisplayName>Steve</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>
@@ -14,8 +14,8 @@
     <Resource Language="x-generate" />
   </Resources>
   <Applications>
-    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="CameraApp.App">
-      <uap:VisualElements DisplayName="CameraApp" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="CameraApp" BackgroundColor="transparent">
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="OpenCam.App">
+      <uap:VisualElements DisplayName="OpenCam" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="OpenCam" BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square310x310Logo="Assets\LargeTile.png" Square71x71Logo="Assets\SmallTile.png">
         </uap:DefaultTile>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />

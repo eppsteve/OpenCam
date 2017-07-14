@@ -1,6 +1,6 @@
 ﻿using CameraApp.Model;
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using Windows.Storage;
 using Windows.System;
@@ -15,15 +15,15 @@ namespace CameraApp
 {
     public sealed partial class Library : Page
     {
-        private static List<Photo> VideosList { get; set; }
-        private static List<Photo> PhotosList { get; set; }
+        private static ObservableCollection<GalleryItem> VideosList { get; set; }
+        private static ObservableCollection<GalleryItem> PhotosList { get; set; }
 
         public Library()
         {
             this.InitializeComponent();
 
-            VideosList = new List<Photo>();
-            PhotosList = new List<Photo>();
+            VideosList = new ObservableCollection<GalleryItem>();
+            PhotosList = new ObservableCollection<GalleryItem>();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -38,7 +38,7 @@ namespace CameraApp
                 }
             };
 
-            getResources();
+            GetResources();
 
             // Set the resources
             photos.ItemsSource = PhotosList;
@@ -51,7 +51,7 @@ namespace CameraApp
             this.Frame.Navigate(typeof(MainPage));
         }
 
-        private void getResources()
+        private void GetResources()
         {
             System.Threading.Tasks.Task.Run(async () =>
             {
@@ -64,14 +64,14 @@ namespace CameraApp
                 foreach (var photo in photos)
                 {
                     PhotosList.Add(
-                        new Photo { Name = photo.Name, Path = new Uri(photo.Path) }
+                        new GalleryItem { Name = photo.Name, Path = new Uri(photo.Path) }
                     );
                 }
 
                 foreach (var video in videos)
                 {
                     VideosList.Add(
-                        new Photo { Name = video.Name, Path = new Uri(video.Path) }
+                        new GalleryItem { Name = video.Name, Path = new Uri(video.Path) }
                     );
                 }
             }).Wait();
@@ -89,7 +89,7 @@ namespace CameraApp
             //get selected item
             foreach (var item in photos.SelectedItems)
             {
-                var image = item as Photo; //cast to photo
+                var image = item as GalleryItem; //cast to photo
                 var path = Path.Combine(ApplicationData.Current.LocalFolder.Path, folder_str + image.Name); //get path
                 StorageFile file = await StorageFile.GetFileFromPathAsync(path); //create storageFile from path
                 t.ItemsToSelect.Add(file);                
@@ -123,7 +123,7 @@ namespace CameraApp
             //get selected item
             foreach (var item in videos.SelectedItems)
             {
-                var video = item as Photo;
+                var video = item as GalleryItem;
                 var path = Path.Combine(ApplicationData.Current.LocalFolder.Path, folder_str + video.Name); //get path
                 StorageFile file = await StorageFile.GetFileFromPathAsync(path); //create storageFile from path
                 t.ItemsToSelect.Add(file);
@@ -146,6 +146,7 @@ namespace CameraApp
             showDialog.DefaultCommandIndex = 0;
             showDialog.CancelCommandIndex = 1;
             var result = await showDialog.ShowAsync();
+
             if ((int)result.Id == 0)
             {
                 var folder_str = "Photos\\";
@@ -153,10 +154,11 @@ namespace CameraApp
                 //get selected item
                 foreach (var item in photos.SelectedItems)
                 {
-                    var photo = item as Photo;
+                    var photo = item as GalleryItem;
                     var path = Path.Combine(ApplicationData.Current.LocalFolder.Path, folder_str + photo.Name); //get path
                     StorageFile file = await StorageFile.GetFileFromPathAsync(path); //create storageFile from path
                     await file.DeleteAsync();
+                    PhotosList.Remove(photo);
                 }
             }
         }
@@ -182,10 +184,11 @@ namespace CameraApp
                 //get selected item
                 foreach (var item in videos.SelectedItems)
                 {
-                    var photo = item as Photo;
-                    var path = Path.Combine(ApplicationData.Current.LocalFolder.Path, folder_str + photo.Name); //get path
+                    var video = item as GalleryItem;
+                    var path = Path.Combine(ApplicationData.Current.LocalFolder.Path, folder_str + video.Name); //get path
                     StorageFile file = await StorageFile.GetFileFromPathAsync(path); //create storageFile from path
                     await file.DeleteAsync();
+                    VideosList.Remove(video);
                 }
             }
         }
